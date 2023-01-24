@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
+import { IFrameParent } from "./IFrameParent";
 
 const Form = () => {
   const [formValues, setFormValues] = useState({
@@ -27,8 +28,10 @@ const Form = () => {
   };
 
   useEffect(() => {
+    IFrameParent(validationErrors);
     console.log(validationErrors);
     if (Object.keys(validationErrors).length === 0 && isSubmit) {
+      IFrameParent({ Success: "All fields are valid" });
       console.log({ Success: "All fields are valid" });
     }
   }, [validationErrors]);
@@ -96,11 +99,16 @@ const Form = () => {
 
   return (
     <>
-      <div
-        className="my-5"
-        style={{ width: "45%", marginLeft: "auto", marginRight: "auto" }}
-      >
-        <h3>Can you please provide your personal details?</h3>
+      <div style={{ width: "70%", marginLeft: "auto", marginRight: "auto" }}>
+        <h3
+          style={{
+            paddingLeft: "51px",
+            paddingTop: "10px",
+            paddingBottom: "10px",
+          }}
+        >
+          Can you please provide your personal details?
+        </h3>
       </div>
       <div
         style={{
@@ -110,7 +118,7 @@ const Form = () => {
         }}
       >
         <form
-          style={{ width: "50%", marginLeft: "auto", marginRight: "auto" }}
+          style={{ width: "70%", marginLeft: "auto", marginRight: "auto" }}
           onSubmit={handleSubmit}
         >
           <div>
